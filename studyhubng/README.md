@@ -1,6 +1,6 @@
 # StudyHub.ng
 
-A polished Vite + React + TypeScript + Tailwind learning platform demo for StudyHub.ng, designed specifically for university students in Nigeria.
+A polished React + TypeScript + Tailwind learning platform demo for StudyHub.ng, designed specifically for university students in Nigeria.
 
 ## Features
 

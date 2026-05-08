@@ -261,34 +261,23 @@ StudyHub NG uses **stateless JWT authentication**:
 
 ---
 
-## Deployment
+### Unified Deployment → Vercel
 
-### Frontend → Vercel
+The project is now configured for a **unified deployment** on Vercel. Both the React frontend and the Express backend will be hosted as a single Vercel project.
 
-The repo includes a `vercel.json` at the project root that handles SPA routing (all paths fall back to `index.html`):
+1. **Push your code to GitHub** (I have already done this for you).
+2. Go to [vercel.com](https://vercel.com), click **Add New** → **Project**.
+3. Import the `studyhub-ng` repository.
+4. Vercel should automatically detect the framework (Vite).
+5. **Environment Variables**: You MUST add the following variables in the Vercel dashboard:
+   - `VITE_API_URL`: Set this to `https://your-project-name.vercel.app/api` (or leave blank if using the relative proxy).
+   - `SUPABASE_URL`: Your Supabase URL.
+   - `SUPABASE_ANON_KEY`: Your Supabase Anon Key.
+   - `JWT_SECRET`: A long random string for authentication.
+   - `CLIENT_URL`: Your Vercel deployment URL (e.g., `https://your-project-name.vercel.app`).
+6. Click **Deploy**.
 
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
-```
-
-1. Push your code to GitHub.
-2. Go to [vercel.com](https://vercel.com), import the repo.
-3. Set the **Root Directory** to `studyhubng/` (the frontend folder).
-4. Add `VITE_API_URL` as an environment variable pointing to your deployed backend URL.
-5. Deploy.
-
-### Backend → Render / Railway
-
-1. Create a new **Web Service** on [Render](https://render.com) or [Railway](https://railway.app).
-2. Point it to the `studyhubng/backend/` directory.
-3. Build command: `npm install`
-4. Start command: `node server.js`
-5. Add all the environment variables from `.env.example` in the platform dashboard.
-6. Update `CLIENT_URL` to your Vercel frontend URL (for CORS).
+The backend is served via Vercel Functions at `/api/*` and the frontend is served as a static site for all other routes.
 
 ---
 
